@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int lengthOfLongestSubstring(char * s){ 
+    int len = sizeof(s) / sizeof(char) ;
+    int start, count, i, j = 0;
+    for (i = 0; i < len;) {
+        int find = 0;
+        for (j = i + 1; j < len; ++j) {
+            if (s[j] == s[i]) {
+                count = (j - start) > count ? (j - start) : count;
+                start = i = j;
+                find = 1;
+                break;
+            }   
+        }   
+        if (!find) {
+            ++i;
+        }   
+    }   
+    return count;
+}
+
+int main() {
+    char test1[] = "abcabcbb";
+    int count = lengthOfLongestSubstring(test1);
+    printf("%d\n", count);
+}
